@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 400px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .login-box {
+            background-color: #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            margin: 10px 20px;
+            
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+        }
+
+        .login-button {
+            width: 50%;
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Lawyer Login</h2>
+            <input type="text" id="lawyer-username" placeholder="Username">
+            <input type="password" id="lawyer-password" placeholder="Password">
+            <button class="login-button" onclick="login('lawyer')">Login</button>
+        </div>
+
+        <div class="login-box">
+            <h2>Client Login</h2>
+            <input type="text" id="client-username" placeholder="Username">
+            <input type="password" id="client-password" placeholder="Password">
+            <button class="login-button" onclick="login('client')">Login</button>
+        </div>
+
+        <div class="login-box">
+            <h2>Judge Login</h2>
+            <input type="text" id="judge-username" placeholder="Username">
+            <input type="password" id="judge-password" placeholder="Password">
+            <button class="login-button" onclick="login('judge')">Login</button>
+        </div>
+    </div>
+
+    <script>
+        function login(userType) {
+            const username = document.getElementById(`${userType}-username`).value;
+            const password = document.getElementById(`${userType}-password`).value;
+
+            // You can add your authentication logic here for each user type
+            if (userType === "lawyer") {
+                // Check lawyer's credentials
+            } else if (userType === "client") {
+                // Check client's credentials
+            } else if (userType === "judge") {
+                // Check judge's credentials
+            }
+        }
+    </script>
+</body>
+</html>

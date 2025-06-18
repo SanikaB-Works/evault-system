@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "axios": "^1.9.0",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "form-data": "^4.0.0",
+    "multer": "^1.4.5-lts.2",
+    "solc": "^0.8.30",
+    "web3": "^1.8.2"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "deploy-contract": "node deploy-contract.js"
+  }
+}

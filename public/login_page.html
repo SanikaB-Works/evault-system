@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eVault - Secure Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3a86ff;
+            --secondary: #8338ec;
+            --dark: #1a1a2e;
+            --light: #ffffff;
+            --success: #38b000;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 4rem);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+        
+        .login-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .login-card {
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            width: 100%;
+            max-width: 350px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            transform: translateY(0);
+        }
+        
+        .login-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .login-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .login-card.lawyer::before {
+            background: linear-gradient(90deg, #3a86ff, #38b000);
+        }
+        
+        .login-card.judge::before {
+            background: linear-gradient(90deg, #fb8500, #ffbe0b);
+        }
+        
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(58, 134, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .lawyer .card-icon {
+            background: rgba(58, 134, 255, 0.1);
+        }
+        
+        .judge .card-icon {
+            background: rgba(251, 133, 0, 0.1);
+        }
+        
+        .card-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .lawyer .card-icon svg {
+            stroke: #3a86ff;
+        }
+        
+        .judge .card-icon svg {
+            stroke: #fb8500;
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #64748b;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.1);
+        }
+        
+        .lawyer .input-field:focus {
+            border-color: #3a86ff;
+            box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.1);
+        }
+        
+        .judge .input-field:focus {
+            border-color: #fb8500;
+            box-shadow: 0 0 0 3px rgba(251, 133, 0, 0.1);
+        }
+        
+        .login-button {
+            width: 100%;
+            padding: 0.875rem;
+            border-radius: 8px;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .lawyer .login-button {
+            background: linear-gradient(90deg, #3a86ff, #38b000);
+        }
+        
+        .judge .login-button {
+            background: linear-gradient(90deg, #fb8500, #ffbe0b);
+        }
+        
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .forgot-password {
+            display: block;
+            text-align: center;
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-top: 1rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .forgot-password:hover {
+            color: var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .login-card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="header">
+            <h1>Blockchain <span>eVault</span></h1>
+            <p class="subtitle">Secure access to your legal documents</p>
+        </div>
+        
+        <div class="login-container">
+            <div class="login-card lawyer">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                        <path d="M2 17l10 5 10-5"></path>
+                        <path d="M2 12l10 5 10-5"></path>
+                    </svg>
+                </div>
+                <h2>Lawyer Access</h2>
+                <form>
+                    <div class="input-group">
+                        <label class="input-label" for="lawyer-username">Username</label>
+                        <input type="text" id="lawyer-username" class="input-field" placeholder="Enter your username">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label" for="lawyer-password">Password</label>
+                        <input type="password" id="lawyer-password" class="input-field" placeholder="Enter your password">
+                    </div>
+                    <button class="login-button" type="button" onclick="login('lawyer')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                            <polyline points="10 17 15 12 10 7"></polyline>
+                            <line x1="15" y1="12" x2="3" y2="12"></line>
+                        </svg>
+                        Login
+                    </button>
+                </form>
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+            
+            <div class="login-card judge">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M8 2h8"></path>
+                        <path d="M12 2v6"></path>
+                        <rect x="2" y="8" width="20" height="12" rx="2"></rect>
+                        <path d="M6 12h.01"></path>
+                        <path d="M18 12h.01"></path>
+                        <path d="M12 12h.01"></path>
+                        <path d="M12 16h.01"></path>
+                        <path d="M6 16h.01"></path>
+                        <path d="M18 16h.01"></path>
+                    </svg>
+                </div>
+                <h2>Judge Access</h2>
+                <form>
+                    <div class="input-group">
+                        <label class="input-label" for="judge-username">Username</label>
+                        <input type="text" id="judge-username" class="input-field" placeholder="Enter your username">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label" for="judge-password">Password</label>
+                        <input type="password" id="judge-password" class="input-field" placeholder="Enter your password">
+                    </div>
+                    <button class="login-button" type="button" onclick="login('judge')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                            <polyline points="10 17 15 12 10 7"></polyline>
+                            <line x1="15" y1="12" x2="3" y2="12"></line>
+                        </svg>
+                        Login
+                    </button>
+                </form>
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function login(userType) {
+            const username = document.getElementById(`${userType}-username`).value;
+            const password = document.getElementById(`${userType}-password`).value;
+
+            if (!username || !password) {
+                alert('Please enter both username and password');
+                return;
+            }
+            
+            // For demo purposes, only check lawyer and judge roles
+            if (userType !== 'lawyer' && userType !== 'judge') {
+                alert('Only lawyer and judge roles are supported in this demo');
+                return;
+            }
+
+            // For demo, accept any credentials
+            if (username === 'demo' && password === 'demo') {
+                // Store user type in localStorage for persistence
+                localStorage.setItem('userType', userType);
+                // Redirect to the appropriate dashboard
+                window.location.href = `/${userType}_dashboard.html`;
+            } else {
+                alert('Invalid credentials. Try with username: demo, password: demo');
+            }
+        }
+    </script>
+</body>
+</html>
